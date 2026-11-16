@@ -411,7 +411,11 @@ export async function runCheckout(
       ? effectiveReferral
       : null;
 
-    const affiliate = input.couponCode && !hasExclusiveJoin25 && !promotion.applies && !eligibleReferral
+    // An approved affiliate link/code can attribute an order during a
+    // sitewide event. The event remains the shopper's only discount; the
+    // affiliate is paid from the final amount charged rather than adding a
+    // second promotion.
+    const affiliate = input.couponCode && !hasExclusiveJoin25 && !eligibleReferral
       ? await tx.affiliate.findFirst({
           where: {
             organizationId,
@@ -446,7 +450,9 @@ export async function runCheckout(
       : eligibleReferral
       ? input.couponCode?.trim().toUpperCase()
       : undefined;
-    if (eligibleAffiliate && eligibleAffiliate.customerDiscountPercent > 0) {
+    // A partner's optional customer discount is never stacked on a sitewide
+    // event. During BOGO or another event, their code is attribution only.
+    if (eligibleAffiliate && !promotion.applies && eligibleAffiliate.customerDiscountPercent > 0) {
       const affiliateDiscount = affiliateDiscountCents(
         grossCentsTotal,
         cogsCentsTotal,
@@ -574,7 +580,10 @@ export async function runCheckout(
       await tx.customerReferral.update({ where: { id: eligibleReferral.id }, data: { referredOrderId: order.id } });
     }
 
-    if (eligibleAffiliate && !promotion.applies) {
+    // Record the referral for event orders too. commissionCents above is
+    // calculated after the event discount, so partners earn only on the
+    // product total the customer actually paid.
+    if (eligibleAffiliate) {
       await tx.affiliateOrderAttribution.create({
         data: { orderId: order.id, affiliateId: eligibleAffiliate.id, commissionCents },
       });
