@@ -6,7 +6,7 @@ import { getActiveBrand } from "@/lib/active-brand";
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { organization } = await requireOrg();
 
-  const [brands, activeBrand, openConversations, pendingAffiliateApplications, pendingAffiliatePayouts, pendingWholesaleInquiries, pendingHeroesRequests] = await Promise.all([
+  const [brands, activeBrand, openConversations, pendingAffiliateApplications] = await Promise.all([
     prisma.brand.findMany({ where: { organizationId: organization.id }, orderBy: { createdAt: "asc" } }),
     getActiveBrand(organization.id),
     prisma.conversation.findMany({
@@ -14,11 +14,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       select: { messages: { orderBy: { createdAt: "desc" }, take: 1, select: { direction: true } } },
     }),
     prisma.affiliate.count({ where: { organizationId: organization.id, status: "PENDING" } }),
-    prisma.affiliatePayoutRequest.count({
-      where: { affiliate: { organizationId: organization.id }, status: "REQUESTED" },
-    }),
-    prisma.wholesaleInquiry.count({ where: { organizationId: organization.id, status: "NEW" } }),
-    prisma.heroesDiscountRequest.count({ where: { organizationId: organization.id, reviewStatus: "PENDING" } }),
   ]);
 
   const pendingEnquiries = openConversations.filter(
@@ -34,9 +29,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         activeBrandId={activeBrand?.id ?? null}
         notificationCounts={{
           support: pendingEnquiries,
-          affiliates: pendingAffiliateApplications + pendingAffiliatePayouts,
-          wholesale: pendingWholesaleInquiries,
-          "heroes-discount": pendingHeroesRequests,
+          affiliates: pendingAffiliateApplications,
         }}
       />
       {/* pt-14 on mobile to clear the fixed top bar; no top padding on desktop */}

@@ -17,7 +17,7 @@ export default async function PaymentsPage() {
 
   return (
     <div>
-      <PageHeader title="Payments" subtitle="Niftipay card payments and reconciliation across EVLV markets" />
+      <PageHeader title="Payments" subtitle="Card payments and reconciliation across processors" />
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         <StatCard label="Card orders" value={String(payments.length)} hint="Latest 200 Niftipay orders" />
         <StatCard label="Confirmed" value={String(paid.length)} hint="Confirmed by signed webhook" />

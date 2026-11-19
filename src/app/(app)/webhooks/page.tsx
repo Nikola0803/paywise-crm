@@ -16,12 +16,12 @@ export default async function WebhooksPage() {
 
   return (
     <div>
-      <PageHeader title="Webhooks" subtitle="Point each WooCommerce store at the central ingestion endpoint" />
+      <PageHeader title="Webhooks" subtitle="Connect merchant websites to receive event data" />
 
       <Card className="p-4 mb-6">
         <h2 className="text-sm font-semibold text-foreground-950 mb-1">Option A — install the plugin</h2>
         <p className="text-xs text-foreground-500 mb-3 max-w-2xl">
-          Download the Command Center Connector plugin, activate it on the WooCommerce site, and paste in the
+          Download the PayWise CRM Connector plugin, activate it on the WooCommerce site, and paste in the
           organization API key below. The plugin registers and verifies the site automatically on activation.
         </p>
         <CopyableField label="Organization API key" value={organization.apiKey} monospace />

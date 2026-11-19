@@ -10,7 +10,7 @@ export default function SetupLayout({ children }: { children: React.ReactNode })
     <div className="min-h-screen bg-background-100">
       <header className="border-b border-background-200 bg-background-50">
         <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
-          <span className="text-sm font-semibold text-foreground-950">EVLV Command Center</span>
+          <span className="text-sm font-semibold text-foreground-950">PayWise CRM</span>
           <Link href="/dashboard" className="text-xs font-medium text-foreground-600 hover:text-foreground-900">
             Back to dashboard
           </Link>

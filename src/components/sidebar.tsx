@@ -36,8 +36,8 @@ export function Sidebar({
           <i className="ri-pulse-line text-lg" />
         </div>
         <div className="leading-tight">
-          <div className="text-sm font-semibold text-foreground-950">Command Center</div>
-          <div className="text-[11px] text-foreground-500">Multi-Brand CRM</div>
+          <div className="text-sm font-semibold text-foreground-950">PayWise CRM</div>
+          <div className="text-[11px] text-foreground-500">Operations Dashboard</div>
         </div>
         {/* Close button — mobile only */}
         <button
@@ -98,7 +98,7 @@ export function Sidebar({
           </div>
           <div className="flex-1 leading-tight min-w-0">
             <div className="text-sm font-medium text-foreground-950 truncate">{organizationName}</div>
-            <div className="text-[11px] text-foreground-500 truncate">{brandCount} brands connected</div>
+            <div className="text-[11px] text-foreground-500 truncate">{brandCount} processor{brandCount !== 1 ? "s" : ""} connected</div>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@ export function Sidebar({
           <div className="w-6 h-6 rounded bg-primary-500 flex items-center justify-center">
             <i className="ri-pulse-line text-xs text-background-50" />
           </div>
-          <span className="text-sm font-semibold text-foreground-950">Command Center</span>
+          <span className="text-sm font-semibold text-foreground-950">PayWise CRM</span>
         </div>
       </header>
 

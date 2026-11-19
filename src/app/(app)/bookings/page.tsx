@@ -41,7 +41,7 @@ export default async function BookingsPage({
     <div>
       <PageHeader
         title="Bookings"
-        subtitle="Education calls booked from EVLV Today and the brand hub"
+        subtitle="Merchant consultations booked via the PayWise website"
       />
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
@@ -98,7 +98,7 @@ export default async function BookingsPage({
         <EmptyState
           icon="ri-calendar-check-line"
           title="No bookings yet"
-          body="Education calls booked via EVLV Today or the brand hub appear here. Connect your storefront using the brand's Booking Public Key from the Settings page."
+          body="Merchant consultations booked via the PayWise website appear here. Connect your site using the processor's Booking Public Key from the Settings page."
         />
       ) : (
         <div className="rounded-lg border border-background-200 bg-background-50 overflow-x-auto">

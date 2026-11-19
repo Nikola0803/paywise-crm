@@ -56,7 +56,7 @@ export default async function ContactsPage() {
 
   return (
     <div>
-      <PageHeader title="Contacts" subtitle={activeBrand ? `${activeBrand.name} customers` : "Unified customer identities across all stores"} />
+      <PageHeader title="Applications" subtitle={activeBrand ? `${activeBrand.name} merchants` : "Merchant applications and profiles"} />
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <StatCard label="Total contacts" value={String(rows.length)} />

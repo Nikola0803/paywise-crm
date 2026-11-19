@@ -96,7 +96,7 @@ export async function inviteMember(formData: FormData): Promise<{ email: string;
   const delivered = await sendEmail(
     email,
     `You've been added to ${organization.name}`,
-    `<p>You now have ${role.toLowerCase()} access to the ${organization.name} Command Center.</p><p>Sign in with:</p><p>Email: ${email}<br/>Temporary password: <strong>${password}</strong></p>`
+    `<p>You now have ${role.toLowerCase()} access to the ${organization.name} PayWise CRM.</p><p>Sign in with:</p><p>Email: ${email}<br/>Temporary password: <strong>${password}</strong></p>`
   ).catch(() => false);
   if (delivered) await prisma.user.update({ where: { id: user.id }, data: { credentialInviteSentAt: new Date() } });
 
